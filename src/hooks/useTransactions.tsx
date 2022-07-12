@@ -19,6 +19,7 @@ type TransactionInput = Omit<Transaction, 'id' | 'createdAt'>
 interface TransactionsContextData {
     transactions: Transaction[]
     createTransaction: (transaction: TransactionInput) => Promise<void>
+    deleteTransaction: (id: number) => void
 }
 
 export const TransactionsContext = createContext<TransactionsContextData>(
@@ -44,8 +45,14 @@ export function TransactionsProvider({ children }: TransactionsProviderProps) {
         setTransactions([...transactions, transaction])
     }
 
+    function deleteTransaction(id: number) {
+        const filteredTransactions = transactions.filter(transaction => transaction.id !== id)
+
+        setTransactions(filteredTransactions)
+    }
+
     return (
-        <TransactionsContext.Provider value={{ transactions, createTransaction }}>
+        <TransactionsContext.Provider value={{ transactions, createTransaction, deleteTransaction }}>
             {children}
         </TransactionsContext.Provider>
     )

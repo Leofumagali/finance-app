@@ -34,5 +34,23 @@ export const Container = styled.div`
                 color: var(--red);
             }
         }
+
+        button {
+            border: 0;
+            display: flex;
+            align-items: center;
+            position: relative;
+
+
+            img {
+                width: 20px;
+                height: 20px;
+
+                position: absolute;
+                top: 18px;
+                right: 18px;
+
+            }
+        }
     }
 `
